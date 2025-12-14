@@ -104,3 +104,7 @@ Current pipeline status: Passing ✅
 Run tests locally:
 
 pytest -q
+
+🤖 How I Used Cursor
+
+I used Cursor as my primary development environment to scaffold the FastAPI project, refactor the LangGraph workflow, and iteratively build and debug the agent nodes. Cursor’s inline AI assistance helped accelerate development, maintain clean structure across files, and quickly resolve integration and CI issues.
