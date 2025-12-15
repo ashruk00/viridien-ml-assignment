@@ -26,6 +26,7 @@ Once the flow was clear, I implemented each step as a separate LangGraph node so
 ## Project Structure
 
 viridien-ml-assignment/
+
 ├── app/
 │   ├── main.py        # FastAPI routes
 │   ├── state.py       # Shared Pydantic state
@@ -43,6 +44,7 @@ viridien-ml-assignment/
 ## Setup
 This project was developed using Python 3.11.
 Clone the repository, create a virtual environment, and install dependencies:
+
 git clone https://github.com/ashruk00/viridien-ml-assignment.git
 
 cd viridien-ml-assignment
@@ -58,18 +60,23 @@ pip install -r requirements.txt
 Start the server with:
 uvicorn app.main:app --reload
 Once running, you can access:
+
 	•	Swagger UI: http://127.0.0.1:8000/docs
+
 	•	Health check: http://127.0.0.1:8000/health
 
 ## Example Usage
 
 I tested the agent using Swagger UI as well as a simple curl request.
+
 curl -X POST http://127.0.0.1:8000/triage/invoke \
   -H "Content-Type: application/json" \
   -d '{
     "ticket_text": "My order ORD1001 is missing an item"
   }'
+
 Example response:
+
 {
   "order_id": "ORD1001",
   "issue_type": "missing_item",
