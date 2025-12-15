@@ -1,31 +1,36 @@
-# Phase 1 — Public
-Minimal mock API and multi-turn demo interactions for ticket triage.
-Viridien ML Assignment – Phase 1 Mock API
+## Viridien ML Assignment – Phase 1 Mock API
 
-This project implements a mock customer support triage agent using FastAPI and LangGraph.
-The agent ingests a customer support ticket, extracts an order ID, classifies the issue, fetches order data, and drafts a response.
+## Overview
 
-🚀 Features
+This project is a simple customer support triage system built for the Viridien ML assignment.
+The goal was to demonstrate a clear, step-by-step workflow using LangGraph, rather than handling everything inside a single API function.
 
-FastAPI-based REST API
+The agent processes a support ticket by extracting an order ID, classifying the issue, fetching order details from mock data, drafting a reply, and finally passing the suggestion through a lightweight admin review step.
 
-Rule-based issue classification
+I intentionally kept the logic rule-based and the data mocked so that the behavior is easy to understand, test, and demonstrate.
 
-Order lookup using mock data
+⸻
 
-State-based agent workflow using LangGraph
+## Design Approach
 
-Drafted customer replies
+Before writing any code, I first outlined the flow on paper:
+	1.	A customer submits a support ticket
+	2.	The assistant extracts an order ID from the text
+	3.	The issue is classified using simple keyword rules
+	4.	Order details are fetched from mock data
+	5.	A reply is drafted for the customer
+	6.	An admin step approves or flags the action
 
-CI pipeline with passing tests
+Once the flow was clear, I implemented each step as a separate LangGraph node so that the shared state could move cleanly through the graph and remain inspectable at every stage.
 
-📁 Project Structure
+## Project Structure
+
 viridien-ml-assignment/
 ├── app/
-│   ├── main.py        # FastAPI app & routes
-│   ├── state.py       # Pydantic state model
-│   ├── nodes.py       # Agent node logic
-│   └── graph.py       # LangGraph workflow
+│   ├── main.py        # FastAPI routes
+│   ├── state.py       # Shared Pydantic state
+│   ├── nodes.py       # LangGraph node logic
+│   └── graph.py       # Graph definition and wiring
 ├── mock_data/
 │   ├── orders.json
 │   ├── issues.json
@@ -35,46 +40,32 @@ viridien-ml-assignment/
 ├── requirements.txt
 └── README.md
 
-⚙️ Setup Instructions
-1️⃣ Clone the repository
-git clone https://github.com/ashruk00/viridien-ml-assignment.git
-cd viridien-ml-assignment
+## Setup
+This project was developed using Python 3.11.
+Clone the repository, create a virtual environment, and install dependencies:
+git clone https://github.com/user_name/repo_name.git
+cd repo_name
 
-2️⃣ Create and activate virtual environment
 python -m venv venv
-
-
-Windows
-
 venv\Scripts\activate
-
-
-Mac / Linux
-
-source venv/bin/activate
-
-3️⃣ Install dependencies
 pip install -r requirements.txt
 
-▶️ Run the API
+## Running the API
+Start the server with:
 uvicorn app.main:app --reload
+Once running, you can access:
+	•	Swagger UI: http://127.0.0.1:8000/docs
+	•	Health check: http://127.0.0.1:8000/health
 
+## Example Usage
 
-The API will be available at:
-
-Swagger UI: http://127.0.0.1:8000/docs
-
-Health Check: http://127.0.0.1:8000/health
-
-🔁 Example: Invoke the Triage Agent
-curl Example
-curl -X POST "http://127.0.0.1:8000/triage/invoke" \
+I tested the agent using Swagger UI as well as a simple curl request.
+curl -X POST http://127.0.0.1:8000/triage/invoke \
   -H "Content-Type: application/json" \
   -d '{
     "ticket_text": "My order ORD1001 is missing an item"
   }'
-
-Sample Response
+Example response:
 {
   "order_id": "ORD1001",
   "issue_type": "missing_item",
@@ -89,22 +80,23 @@ Sample Response
     "Extracted order_id: ORD1001",
     "Issue classified as: missing_item",
     "Fetched order: ORD1001",
-    "Drafted reply using order details."
+    "Drafted reply using order details.",
+    "Admin: approved the suggested action."
   ]
 }
+The messages field makes it easy to see how the state progressed through each node in the graph.
 
-🧪 Tests & CI
+## Testing and CI
 
-CI runs automatically on every push using GitHub Actions
+A small smoke test is included so that the CI pipeline runs on every push.
+This helped verify that dependencies install correctly and that the project imports cleanly in a fresh environment.
 
-Tests executed via pytest
-
-Current pipeline status: Passing ✅
-
-Run tests locally:
-
+Run tests locally with:
 pytest -q
+The GitHub Actions workflow currently passes on the main branch.
 
-🤖 How I Used Cursor
+## AI Tool Usage
+I used Cursor as a coding assistant while building this project. Cursor was helpful for scaffolding files, refactoring LangGraph nodes, and debugging import and dependency issues.
+The overall design decisions, workflow planning, and testing were done manually, with Cursor mainly used to speed up iteration and reduce boilerplate.
 
-I used Cursor as my primary development environment to scaffold the FastAPI project, refactor the LangGraph workflow, and iteratively build and debug the agent nodes. Cursor’s inline AI assistance helped accelerate development, maintain clean structure across files, and quickly resolve integration and CI issues.
+
