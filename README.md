@@ -43,12 +43,16 @@ viridien-ml-assignment/
 ## Setup
 This project was developed using Python 3.11.
 Clone the repository, create a virtual environment, and install dependencies:
-git clone https://github.com/user_name/repo_name.git
-cd repo_name
+git clone https://github.com/ashruk00/viridien-ml-assignment.git
+
+cd viridien-ml-assignment
 
 python -m venv venv
+
 venv\Scripts\activate
+
 pip install -r requirements.txt
+
 
 ## Running the API
 Start the server with:
