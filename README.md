@@ -1,8 +1,8 @@
-## Viridien ML Assignment – Phase 1 Mock API
+## Agentic Support Ticket Triage (LangGraph + FastAPI)– Phase 1 Mock API
 
 ## Overview
 
-This project is a simple customer support triage system built for the Viridien ML assignment.
+This project is a simple customer support triage system.
 The goal was to demonstrate a clear, step-by-step workflow using LangGraph, rather than handling everything inside a single API function.
 
 The agent processes a support ticket by extracting an order ID, classifying the issue, fetching order details from mock data, drafting a reply, and finally passing the suggestion through a lightweight admin review step.
