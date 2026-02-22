@@ -2,13 +2,9 @@
 
 ## Overview
 
-This project is a simple customer support triage system.
-The goal was to demonstrate a clear, step-by-step workflow using LangGraph, rather than handling everything inside a single API function.
-
-The agent processes a support ticket by extracting an order ID, classifying the issue, fetching order details from mock data, drafting a reply, and finally passing the suggestion through a lightweight admin review step.
-
-I intentionally kept the logic rule-based and the data mocked so that the behavior is easy to understand, test, and demonstrate.
-
+This project implements a stateful, step by step customer support triage workflow using LangGraph and FastAPI. The system ingests a support ticket, extracts an order ID, classifies the issue type, fetches order context from mock data, drafts a reply, and routes the suggestion through a lightweight admin review step.
+The goal is to demonstrate how to build an agent-style workflow with explicit state and control flow, instead of handling everything inside a single API function.
+The logic is intentionally rule-based and the data is mocked in Phase 1 so the behavior is easy to reason about, test, and extend.
 ⸻
 
 ## Design Approach
